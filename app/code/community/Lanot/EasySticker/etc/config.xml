@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+    <modules>
+        <Lanot_EasySticker>
+            <version>4.4.0</version>
+        </Lanot_EasySticker>
+    </modules>
+
+    <global>
+        <helpers>
+            <lanot_easysticker>
+                <class>Lanot_EasySticker_Helper</class>
+            </lanot_easysticker>
+        </helpers>
+
+        <blocks>
+            <lanot_easysticker>
+                <class>Lanot_EasySticker_Block</class>
+            </lanot_easysticker>
+        </blocks>
+
+        <models>
+            <lanot_easysticker>
+                <class>Lanot_EasySticker_Model</class>
+                <resourceModel>lanot_easysticker_resource</resourceModel>
+            </lanot_easysticker>
+            <lanot_easysticker_resource>
+                <class>Lanot_EasySticker_Model_Mysql4</class>
+                <entities>
+                    <sticker><table>lanot_easysticker_sticker</table></sticker>
+                    <sticker_product><table>lanot_easysticker_sticker_product</table></sticker_product>
+                </entities>
+            </lanot_easysticker_resource>
+        </models>
+
+        <resources>
+            <lanot_easysticker_setup>
+                <setup>
+                    <module>Lanot_EasySticker</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+            </lanot_easysticker_setup>
+        </resources>
+    </global>
+
+    <frontend>
+        <!-- OBSERVER EVENTS -->
+        <events>
+            <!-- PRODUCT EVENTS -->
+            <catalog_product_load_after>
+                <observers>
+                    <lanot_easysticker>
+                        <type>singleton</type>
+                        <class>lanot_easysticker/observer</class>
+                        <method>catalogProductLoadAfter</method>
+                    </lanot_easysticker>
+                </observers>
+            </catalog_product_load_after>
+            <catalog_product_collection_load_after>
+                <observers>
+                    <lanot_easysticker>
+                        <type>singleton</type>
+                        <class>lanot_easysticker/observer</class>
+                        <method>catalogProductCollectionLoadAfter</method>
+                    </lanot_easysticker>
+                </observers>
+            </catalog_product_collection_load_after>
+            <!--/PRODUCT EVENTS -->
+
+            <!-- CUSTOM EVENTS BY LANOT -->
+            <catalog_product_prepare_image_output_before>
+                <observers>
+                    <lanot_easysticker>
+                        <type>singleton</type>
+                        <class>lanot_easysticker/observer</class>
+                        <method>catalogProductPrepareImageBefore</method>
+                    </lanot_easysticker>
+                </observers>
+            </catalog_product_prepare_image_output_before>
+            <catalog_product_prepare_image_output_after>
+                <observers>
+                    <lanot_easysticker>
+                        <type>singleton</type>
+                        <class>lanot_easysticker/observer</class>
+                        <method>catalogProductPrepareImageAfter</method>
+                    </lanot_easysticker>
+                </observers>
+            </catalog_product_prepare_image_output_after>
+            <!--/CUSTOM EVENTS BY LANOT -->
+        </events>
+        <!--/OBSERVER EVENTS -->
+    </frontend>
+
+
+    <adminhtml>
+        <!-- OBSERVER EVENTS -->
+        <events>
+            <!-- PRODUCT EVENTS -->
+            <catalog_product_save_after>
+                <observers>
+                    <lanot_easysticker>
+                        <type>singleton</type>
+                        <class>lanot_easysticker/observer</class>
+                        <method>catalogProductSaveAfter</method>
+                    </lanot_easysticker>
+                </observers>
+            </catalog_product_save_after>
+            <!--/PRODUCT EVENTS -->
+            <!-- STICKER EVENTS -->
+            <lanot_sticker_save_after>
+                <observers>
+                    <lanot_premiumsticker>
+                        <type>singleton</type>
+                        <class>lanot_easysticker/observer</class>
+                        <method>stickerSaveAfter</method>
+                    </lanot_premiumsticker>
+                </observers>
+            </lanot_sticker_save_after>
+            <!--/STICKER EVENTS -->
+        </events>
+        <!--/OBSERVER EVENTS -->
+
+        <layout>
+            <updates>
+                <lanot_easysticker>
+                    <file>lanot_easysticker.xml</file>
+                </lanot_easysticker>
+            </updates>
+        </layout>
+
+        <!-- translations -->
+        <translate>
+            <modules>
+                <Lanot_EasySticker>
+                    <files>
+                        <default>Lanot_EasySticker.csv</default>
+                    </files>
+                </Lanot_EasySticker>
+            </modules>
+        </translate>
+        <!-- translations -->
+    </adminhtml>
+
+    <admin>
+        <routers>
+            <lanot_easysticker>
+                <use>admin</use>
+                <args>
+                    <module>Lanot_EasySticker</module>
+                    <frontName>lanot_easysticker</frontName>
+                </args>
+            </lanot_easysticker>
+        </routers>
+    </admin>
+
+    <default>
+        <lanot_easysticker>
+            <!-- all image attributes -->
+            <attributes>
+                <image />
+                <small_image />
+                <thumbnail />
+                <media_gallery />
+            </attributes>
+            <!-- /all image attributes -->
+
+            <view>
+                <enabled>1</enabled>
+                <allowed_attributes>image,media_gallery,small_image,thumbnail</allowed_attributes>
+            </view>
+
+            <preview>
+                <sample>lanot/easysticker/preview/sample.jpg</sample>
+            </preview>
+        </lanot_easysticker>
+    </default>
+</config>

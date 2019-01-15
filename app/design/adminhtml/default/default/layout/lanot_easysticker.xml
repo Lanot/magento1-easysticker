@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento backend layout
+ *
+ * @author Lanot
+ */
+-->
+<layout>
+<!-- ADMIN STICKERS -->
+
+    <lanot_lightbox>
+        <reference name="head">
+            <action method="addJs"><script>lanot/lightbox2/js/lightbox.js</script></action>
+            <action method="addJs"><script>lanot/lightbox2/js/scriptaculous.js?load=effects,builder</script></action>
+            <action method="addItem"><type>skin_css</type><name>lanot/lightbox2/css/lightbox.css</name><params/></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" template="lanot/easysticker/edit/js.phtml" before="-"/>
+        </reference>
+    </lanot_lightbox>
+
+    <lanot_easysticker_adminhtml_sticker_index>
+        <reference name="content">
+            <block type="lanot_easysticker/adminhtml_sticker" name="easysticker_sticker" />
+        </reference>
+    </lanot_easysticker_adminhtml_sticker_index>
+
+    <lanot_easysticker_adminhtml_sticker_grid>
+        <block type="lanot_easysticker/adminhtml_sticker_grid" name="root"/>
+    </lanot_easysticker_adminhtml_sticker_grid>
+
+    <lanot_easysticker_adminhtml_sticker_new>
+        <update handle="lanot_easysticker_adminhtml_sticker_edit" />
+    </lanot_easysticker_adminhtml_sticker_new>
+
+    <!-- STICKER EDIT PAGE -->
+    <lanot_easysticker_adminhtml_sticker_edit>
+        <update handle="lanot_lightbox"/>
+        <reference name="content">
+            <block type="lanot_easysticker/adminhtml_sticker_edit" name="easysticker_sticker_edit" />
+        </reference>
+        <reference name="left">
+            <block type="lanot_easysticker/adminhtml_sticker_edit_tabs" name="sticker_edit_tabs">
+                <action method="addTab">
+                    <name>sticker_main_info</name>
+                    <block>lanot_easysticker/adminhtml_sticker_edit_tab_main</block>
+                </action>
+            </block>
+        </reference>
+    </lanot_easysticker_adminhtml_sticker_edit>
+    <!-- /STICKER EDIT PAGE -->
+
+
+    <!-- PRODUCT EDIT PAGE -->
+    <lanot_easysticker_adminhtml_sticker_stickergrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="lanot_easysticker/adminhtml_product_edit_tabs_sticker_grid" name="product.edit.tab.grid.sticker"/>
+            <block type="adminhtml/widget_grid_serializer" name="product_sticker_grid_serializer">
+                <reference name="product_sticker_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>product.edit.tab.grid.sticker</grid_block_name>
+                        <data_callback>getSelectedLinks</data_callback>
+                        <hidden_input_name>product[lanot_stickers]</hidden_input_name>
+                        <reload_param_name>stickers_in_selected</reload_param_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </lanot_easysticker_adminhtml_sticker_stickergrid>
+    
+    <lanot_easysticker_adminhtml_sticker_stickergridonly>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="lanot_easysticker/adminhtml_product_edit_tabs_sticker_grid" name="product.edit.tab.grid.sticker"/>
+        </block>
+    </lanot_easysticker_adminhtml_sticker_stickergridonly>
+
+    <adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <action method="addTab">
+                <name>product_stickers</name>
+                <block>lanot_easysticker/adminhtml_product_edit_tabs_sticker</block>
+            </action>
+        </reference>
+    </adminhtml_catalog_product_edit>
+    <!-- /PRODUCT EDIT PAGE -->
+
+
+<!-- /ADMIN STICKERS -->
+</layout>

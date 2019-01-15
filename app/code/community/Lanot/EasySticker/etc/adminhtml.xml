@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<config>
+    <!--/MENU -->
+    <menu>
+        <lanot translate="title">
+            <title>Lanot</title>
+            <sort_order>65</sort_order>
+            <children>
+                <lanot_easysticker translate="title" module="lanot_easysticker">
+                    <title>Manage Stickers</title>
+                    <action>lanot_easysticker/adminhtml_sticker</action>
+                    <sort_order>10</sort_order>
+                </lanot_easysticker>
+            </children>
+        </lanot>
+    </menu>
+    <!--/MENU -->
+
+    <!--ACL -->
+    <acl>
+        <resources>
+            <admin>
+                <children>
+
+                    <lanot>
+                        <title>Lanot</title>
+                        <sort_order>65</sort_order>
+                        <children>
+                            <lanot_easysticker translate="title" module="lanot_easysticker">
+                                <title>Lanot Stickers</title>
+                                <sort_order>65</sort_order>
+
+                                <children>
+                                    <manage_sticker translate="title">
+                                        <title>Manage Stickers</title>
+                                        <sort_order>0</sort_order>
+                                        <children>
+                                            <save translate="title">
+                                                <title>Save Stickers</title>
+                                                <sort_order>0</sort_order>
+                                            </save>
+                                            <delete translate="title">
+                                                <title>Delete Stickers</title>
+                                                <sort_order>10</sort_order>
+                                            </delete>
+                                            <assign translate="title">
+                                                <title>Assign Stickers To Products</title>
+                                                <sort_order>0</sort_order>
+                                            </assign>
+                                        </children>
+                                    </manage_sticker>
+                                </children>
+
+                            </lanot_easysticker>
+                        </children>
+                    </lanot>
+
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <lanot_easysticker translate="title" module="lanot_easysticker">
+                                        <title>Lanot EasySticker Configuration</title>
+                                    </lanot_easysticker>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <!--/ACL -->
+</config>
